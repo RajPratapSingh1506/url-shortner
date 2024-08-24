@@ -20,6 +20,12 @@ app.use(express.urlencoded({extended:false}));
 
 app.use('/url',urlRouters);
 
+app.all('*',(req,res)=>{
+    res.status(404).json({
+        status:"Failure",
+        Message:`Can't find ${req.originalUrl} on this server`
+    })
+});
 
 const PORT=3000;
 app.listen(PORT,()=>{
